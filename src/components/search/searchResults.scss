@@ -1,0 +1,28 @@
+$scrollbar-border-radius: 0.2rem;
+
+#search-results-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    position: relative;
+    right: 1.9rem;
+
+    #clear-results {
+        color: white;
+        cursor: pointer;
+        width: 25rem;
+        display: flex;
+        justify-content: flex-end;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    #search-results {
+        max-height: 30.95rem;
+        width: 25rem;
+        overflow: hidden;
+    }
+}

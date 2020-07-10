@@ -1,0 +1,32 @@
+.search-result {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+    margin-bottom: .3rem;
+    background-color: white;
+    z-index: -1;
+    display: flex;
+    justify-content: space-between;
+    margin-right: .1rem;
+    transition: 0.3s opacity;
+
+    .result-meta {
+        display: flex;
+        font-size: 0.7rem;
+
+        .meta-type {
+            margin-right: 0.1rem;
+        }
+    }
+}
+
+.parent-hovered {
+    opacity: 0.5;
+}
+
+.self-hovered {
+    opacity: 1;
+}
+
+.last {
+    margin-bottom: 0;
+}
