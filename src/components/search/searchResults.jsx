@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SearchResult from './searchResult';
 
 /* ---------- */
@@ -22,17 +22,12 @@ function SearchResults(props) {
                 >
 
                     <FadeIn delay={15}>
-                        {props.movies.map((movie, index) => {
-                            if (index === props.movies.length-1) {
-                                return <SearchResult key={movie.id} movie={movie} last hoverState={hoverState} />
-                            } else {
-                                /*
-                                    `else` block is not necessary here because return statement
-                                    above would stop the function from completing, but it adds to the readability.
-                                */
-                                return <SearchResult key={movie.id} movie={movie} hoverState={hoverState} />
-                            }
-                        })}
+                        {props.movies.map((movie, index) => (
+                            <SearchResult key={movie.id} 
+                                            movie={movie} 
+                                            last={index === props.movies.length-1} 
+                                            hoverState={hoverState} />
+                        ))}
                     </FadeIn>
 
 
