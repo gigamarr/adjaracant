@@ -3,6 +3,10 @@ import SearchBar from './search/searchBar';
 import SearchResults from './search/searchResults';
 import adjaranetService from 'services/adjaranetService';
 
+/* ---------- */
+import './home.scss';
+/* ---------- */
+
 class Home extends Component {
     constructor(props){
         super(props);
@@ -29,6 +33,9 @@ class Home extends Component {
     render() {
         return (
             <React.Fragment>
+                <div id="website-logo">
+                    <img src="logo.svg" />
+                </div>
                 <SearchBar  onInputChange={this.setQuery} 
                             onSearch={this.search} 
                             searchInProcess={this.state.searchInProcess} 

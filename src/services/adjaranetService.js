@@ -11,6 +11,10 @@ const apiClient = axios.create({
 
 export default {
     search(keywords) {
-        return apiClient.get(`search/keywords=${keywords}`)
+        return apiClient.get(`search/${keywords}`)
+    },
+
+    getData(movieId) {
+        return apiClient.get(`get-data/${movieId}`)
     }
 }
