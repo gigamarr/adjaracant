@@ -2,18 +2,16 @@ import React from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
-    Link
+    Route
 } from 'react-router-dom';
-import Home from './components/home';
-import WatchPage from './components/watch';
+import Home from './pages/home';
+import WatchPage from './pages/watch';
+import Footer from 'components/footer';
 
 
 function App() {
     return (
         <Router>
-            <Link to="/">Home</Link>
-
             <Switch>
                 <Route path="/watch/:id">
                     <WatchPage />
@@ -23,6 +21,8 @@ function App() {
                     <Home />
                 </Route>
             </Switch>
+
+            <Footer />
         </Router>
     )
 }

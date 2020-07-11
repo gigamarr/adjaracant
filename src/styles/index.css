@@ -10,4 +10,9 @@
 body {
     background-color: #242424;
     font-size: 62.5%;
+    min-height: 100%;
+}
+
+#root {
+    height: 100%;
 }

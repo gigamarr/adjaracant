@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import SearchBar from './search/searchBar';
-import SearchResults from './search/searchResults';
+import SearchBar from 'components/search/searchBar';
+import SearchResults from 'components/search/searchResults';
 import adjaranetService from 'services/adjaranetService';
 
 /* ---------- */
-import './home.scss';
+import './styles/home.scss';
 /* ---------- */
 
 class Home extends Component {
@@ -34,8 +34,9 @@ class Home extends Component {
         return (
             <React.Fragment>
                 <div id="website-logo">
-                    <img src="logo.svg" />
+                    <img src="logo.svg" alt="logo" />
                 </div>
+
                 <SearchBar  onInputChange={this.setQuery} 
                             onSearch={this.search} 
                             searchInProcess={this.state.searchInProcess} 

@@ -3,7 +3,7 @@ import SearchResult from './searchResult';
 
 /* ---------- */
 import FadeIn from 'react-fade-in';
-import './searchResults.scss';
+import './styles/searchResults.scss';
 /* ---------- */
 
 function SearchResults(props) {    
