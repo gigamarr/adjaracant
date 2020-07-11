@@ -9,7 +9,7 @@ function SearchResult(props) {
     const [hoverState, setHoverState] = useState(false)
     
     return (
-        <div className={`search-result ${props.last ? 'last' : ''} ${props.hoverState ? 'parent-hovered' : ''} ${hoverState ? 'self-hovered' : ''}`} 
+        <div className={`search-result${props.last ? ' last' : ''}${props.hoverState ? ' parent-hovered' : ''}${hoverState ? ' self-hovered' : ''}${props.onlyChild ? ' only-child' : ''}`} 
             onMouseEnter={() => setHoverState(true)}
             onMouseLeave={() => setHoverState(false)}
         >

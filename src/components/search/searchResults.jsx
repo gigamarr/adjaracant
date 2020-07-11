@@ -26,6 +26,7 @@ function SearchResults(props) {
                             <SearchResult key={movie.id} 
                                             movie={movie} 
                                             last={index === props.movies.length-1} 
+                                            onlyChild={props.movies.length === 1}
                                             hoverState={hoverState} />
                         ))}
                     </FadeIn>
