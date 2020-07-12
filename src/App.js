@@ -8,23 +8,40 @@ import Home from './pages/home';
 import WatchPage from './pages/watch';
 import Footer from 'components/footer';
 
+class App extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            movieName: ''
+        }
+    }
 
-function App() {
-    return (
-        <Router>
-            <Switch>
-                <Route path="/watch/:id">
-                    <WatchPage />
-                </Route>
+    setTitle = (movieName) => {
+        this.setState({
+            movieName
+        })
+    }
 
-                <Route path="/">
-                    <Home />
-                </Route>
-            </Switch>
+    render() {
+        return (
+            <React.Fragment>
+                <Router>
+                    <Switch>
+                        <Route path="/watch/:id">
+                            <WatchPage movieName={this.state.movieName} />
+                        </Route>
 
-            <Footer />
-        </Router>
-    )
+                        <Route path="/">
+                            <Home  getTitle={this.setTitle} />
+                        </Route>
+                    </Switch>
+                </Router>
+
+                <Footer />
+                
+            </React.Fragment>
+        )
+    }
 }
 
 /* ---------- */

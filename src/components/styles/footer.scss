@@ -9,6 +9,8 @@ footer {
 
     a {
         margin: 0 0.3rem;
+        position: relative;
+        top: 0.05rem;
 
         svg.github {
                 &:hover {

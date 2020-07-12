@@ -1,0 +1,27 @@
+#video-player-container {
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    height: 40rem;
+    width: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    flex-direction: column;
+
+    .movie-title {
+        margin-top: 1rem;
+        padding-left: 2.3rem;
+        display: flex;
+        justify-content: flex-start;
+        font-size: 1rem;
+        text-transform: uppercase;
+        width: 100%;
+        color: whitesmoke;
+    }
+
+}
+
+.video-js {
+    height: 100%;
+    width: 95%;
+}

@@ -20,7 +20,7 @@ class Footer extends React.Component {
     render() {
         return (
             <footer>
-            Built with 
+            Built with react
                 <a href="https://reactjs.org">
                     <FontAwesomeIcon icon={faReact} color="skyblue" /> 
                 </a>
