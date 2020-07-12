@@ -11,7 +11,7 @@ function SearchResult(props) {
     
     return (
         <Link to={`/watch/${adjaraId}/${slugify(title)}`} className="search-result-anchor">
-            <div className={`search-result${props.last ? ' last' : ''}${props.hoverState ? ' parent-hovered' : ''}${hoverState ? ' self-hovered' : ''}${props.onlyChild ? ' only-child' : ''}`} 
+            <div className={calculateClassName(props, hoverState)} 
                 onMouseEnter={() => setHoverState(true)}
                 onMouseLeave={() => setHoverState(false)}
             >
@@ -35,6 +35,10 @@ function SearchResult(props) {
 
 function slugify(title) {
     return title.toLowerCase().replace(" ", "-")
+}
+
+function calculateClassName(props, hoverState) {
+    return `search-result${props.last ? ' last' : ''}${props.hoverState ? ' parent-hovered' : ''}${hoverState ? ' self-hovered':''}${props.onlyChild ? ' only-child':''}`
 }
 /* ---------- */
 
