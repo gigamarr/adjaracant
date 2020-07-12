@@ -6,17 +6,17 @@ import './styles/searchResult.scss';
 /* ---------- */
 
 function SearchResult(props) {
-    const { name, isTvShow, year, adjaraId } = props.movie
+    const { name: title, isTvShow, year, adjaraId } = props.movie
     const [hoverState, setHoverState] = useState(false)
     
     return (
-        <Link to={`/watch/${adjaraId}`} onClick={() => props.getTitle(name)} className="search-result-anchor">
+        <Link to={`/watch/${adjaraId}/${slugify(title)}`} className="search-result-anchor">
             <div className={`search-result${props.last ? ' last' : ''}${props.hoverState ? ' parent-hovered' : ''}${hoverState ? ' self-hovered' : ''}${props.onlyChild ? ' only-child' : ''}`} 
                 onMouseEnter={() => setHoverState(true)}
                 onMouseLeave={() => setHoverState(false)}
             >
                 <div>
-                    <p title={name}>{name.length <= 35 ? name : name.slice(0,36) + '...'}</p>
+                    <p title={title}>{title.length <= 35 ? title : title.slice(0,36) + '...'}</p>
                 </div>
 
                 <div className="result-meta">
@@ -33,6 +33,9 @@ function SearchResult(props) {
     )
 }
 
+function slugify(title) {
+    return title.toLowerCase().replace(" ", "-")
+}
 /* ---------- */
 
 export default SearchResult;

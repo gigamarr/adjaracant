@@ -10,7 +10,6 @@ class VideoPlayer extends Component {
         super(props)
         this.state = {
             backgroundImage: this.props.movieDetails.data.data[0].covers['1920'],
-            name: this.props.title
         }
     }
 
@@ -33,7 +32,7 @@ class VideoPlayer extends Component {
                 </div>
 
                 <div className="movie-title">
-                    <h3>{this.state.name}</h3>
+                    <h3>{this.props.title}</h3>
                 </div>
             </div>
         )

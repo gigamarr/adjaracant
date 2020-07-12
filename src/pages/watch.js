@@ -14,13 +14,18 @@ class WatchPage extends React.Component {
         super(props)
         this.state = {
             videoJsOptions: null,
-            movieDetails: null        
+            movieDetails: null,
+            title: null // is contained in the `movieDetail` but goal is to display title the way user searched it  
         }
     }
 
     componentDidMount() {
         adjaranetService.getData(this.props.match.params.id)
         .then(response => {
+            this.setState({
+                title: deslugify(this.props.match.params.title)
+            })
+
             adjaranetService.getFiles(response.data.data.id)
             .then(response => {
                 this.setState({
@@ -43,11 +48,15 @@ class WatchPage extends React.Component {
             <React.Fragment>
                 <NavBar />
                 {this.state.videoJsOptions && (
-                    <VideoPlayer {...this.state.videoJsOptions} movieDetails={this.state.movieDetails} title={this.props.movieName} />
+                    <VideoPlayer {...this.state.videoJsOptions} movieDetails={this.state.movieDetails} title={this.state.title} />
                 )}
             </React.Fragment>
         )
     }
+}
+
+function deslugify(slug) {
+    return slug.replace("-", " ")
 }
 
 /* ---------- */

@@ -42,7 +42,7 @@ class Home extends Component {
                             searchInProcess={this.state.searchInProcess} 
                             searchCompleted={this.state.searchCompleted}
                 />
-                <SearchResults getTitle={this.props.getTitle} movies={this.state.results} onClear={this.clearSearchResults} />
+                <SearchResults movies={this.state.results} onClear={this.clearSearchResults} />
             </React.Fragment>
         )
     }

@@ -27,8 +27,8 @@ function SearchResults(props) {
                                             movie={movie} 
                                             last={index === props.movies.length-1} 
                                             onlyChild={props.movies.length === 1}
-                                            hoverState={hoverState}
-                                            getTitle={props.getTitle} />
+                                            hoverState={hoverState} 
+                            />
                         ))}
                     </FadeIn>
 
