@@ -75,6 +75,7 @@ class Home extends Component {
                 
                 this.resetSearchForm()
                 
+                console.log(this.state)
             })
         }
     }
@@ -84,7 +85,7 @@ class Home extends Component {
         const arrayWithNames = [originalName, primaryName, secondaryName, tertiaryName].filter(name => name.length !== 0)
 
         for (let movieName of arrayWithNames) {
-            if (movieName.toLowerCase().includes(query) && movie.type !== "person") {
+            if (movieName.toLowerCase().includes(query) && movie.type !== "person" && movie.adjaraId) {
                 movie.name = movieName
                 return movie
             }

@@ -30,6 +30,10 @@ class WatchPage extends React.Component {
 
             adjaranetService.getFiles(response.data.data.id)
             .then(response => {
+                
+                const sources = this.getSources(response)
+
+
                 this.setState({
                     videoJsOptions: {
                         autoplay: false,
@@ -44,19 +48,20 @@ class WatchPage extends React.Component {
                                 "fullscreenToggle",
                             ]
                         },
-                        sources: [
-                            {
-                                src: response.data.data[0].files[0].files[0].src,
-                                type: "video/mp4",
-                                label: '720'
-                            },
+                        // sources: [
+                        //     {
+                        //         src: response.data.data[0].files[0].files[0].src,
+                        //         type: "video/mp4",
+                        //         label: '720'
+                        //     },
 
-                            {
-                                src: response.data.data[0].files[0].files[0].src,
-                                type: "video/mp4",
-                                label: '480'
-                            }
-                        ]
+                        //     {
+                        //         src: response.data.data[0].files[0].files[0].src,
+                        //         type: "video/mp4",
+                        //         label: '480'
+                        //     }
+                        // ]
+                        sources
                     },
                     movieDetails: response
                 })
@@ -79,6 +84,32 @@ class WatchPage extends React.Component {
         const { originalName, primaryName, secondaryName, tertiaryName } = response.data.data;
         const matchingTitles = [originalName, primaryName, secondaryName, tertiaryName].filter(title => slugify(title) === slug);
         return matchingTitles[0] || 'title not matched';
+    }
+
+    getSources(response) {
+
+        const src = response.data.data.map(episode => {
+                        const episodeSources = []
+
+                        episode.files.forEach(file => {
+                            const langSources = {
+                                lang: file.lang,
+                                sources: [
+
+                                ]
+                            }
+
+                            file.files.forEach(source => {
+                                langSources.sources.push({src: source.src, label: source.quality, type: "video/mp4"})
+                            })
+
+                            episodeSources.push(langSources)
+                        })
+                        return episodeSources[0];
+                    })
+
+        console.log(src)
+        return src[0].sources
     }
 }
 

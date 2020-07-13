@@ -13,32 +13,30 @@ function SearchResult(props) {
     /* `adjaraId === null` means the movie is not accessible
         but there are cases where they are inaccessible regardless of the `adjaraId`,
         those cases usually involve content taken down due to DMCA strikes.
+
+        logic for filtering moved to `home.js/filterMovie`
     */
     return (
-        <React.Fragment>
-            {adjaraId && (
-                <Link to={`/watch/${adjaraId}/${slugify(title)}`} className="search-result-anchor">
-                    <div className={calculateClassName(props, hoverState)} 
-                        onMouseEnter={() => setHoverState(true)}
-                        onMouseLeave={() => setHoverState(false)}
-                    >
-                        <div>
-                            <p title={title}>{title.length <= 35 ? title : title.slice(0,36) + '...'}</p>
-                        </div>
+        <Link to={`/watch/${adjaraId}/${slugify(title)}`} className="search-result-anchor">
+            <div className={calculateClassName(props, hoverState)} 
+                onMouseEnter={() => setHoverState(true)}
+                onMouseLeave={() => setHoverState(false)}
+            >
+                <div>
+                    <p title={title}>{title.length <= 35 ? title : title.slice(0,36) + '...'}</p>
+                </div>
 
-                        <div className="result-meta">
-                            <div className="meta-type">
-                                <p>{isTvShow ? 'TV Show' : 'Movie'}</p>
-                            </div>
-
-                            <div>
-                                <p>({year})</p>
-                            </div>
-                        </div>
+                <div className="result-meta">
+                    <div className="meta-type">
+                        <p>{isTvShow ? 'TV Show' : 'Movie'}</p>
                     </div>
-                </Link>
-            )}
-        </React.Fragment>
+
+                    <div>
+                        <p>({year})</p>
+                    </div>
+                </div>
+            </div>
+        </Link>
     )
 }
 
