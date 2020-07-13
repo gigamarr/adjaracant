@@ -23,7 +23,6 @@ class WatchPage extends React.Component {
     componentDidMount() {
         adjaranetService.getData(this.props.match.params.id)
         .then(response => {
-            // console.log(this.props.match.params.title)
             const matchingTitle = this.matchTitle(response, this.props.match.params.title);
             this.setState({
                 title: matchingTitle
