@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import adjaranetService from 'services/adjaranetService';
 import VideoPlayer from 'components/videoPlayer';
 import NavBar from 'components/navBar';
+import slugify from 'services/utilities/slugify';
 
 /* ---------- */
 import './styles/watch.scss';
@@ -15,15 +16,17 @@ class WatchPage extends React.Component {
         this.state = {
             videoJsOptions: null,
             movieDetails: null,
-            title: null // is contained in the `movieDetail` but goal is to display title the way user searched it  
+            title: null // is contained in the `movieDetail` but goal is to display title the way user searched it on home page
         }
     }
 
     componentDidMount() {
         adjaranetService.getData(this.props.match.params.id)
         .then(response => {
+            // console.log(this.props.match.params.title)
+            const matchingTitle = this.matchTitle(response, this.props.match.params.title);
             this.setState({
-                title: deslugify(this.props.match.params.title)
+                title: matchingTitle
             })
 
             adjaranetService.getFiles(response.data.data.id)
@@ -53,11 +56,14 @@ class WatchPage extends React.Component {
             </React.Fragment>
         )
     }
+
+    matchTitle(response, slug) {
+        const { originalName, primaryName, secondaryName, tertiaryName } = response.data.data;
+        const matchingTitles = [originalName, primaryName, secondaryName, tertiaryName].filter(title => slugify(title) === slug);
+        return matchingTitles[0] || 'title not matched';
+    }
 }
 
-function deslugify(slug) {
-    return slug.split("-").join(" ")
-}
 /* ---------- */
 
 export default withRouter(WatchPage);
