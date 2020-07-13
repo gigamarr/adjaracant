@@ -11,7 +11,7 @@ function SearchResult(props) {
     const [hoverState, setHoverState] = useState(false)
     
     /* `adjaraId === null` means the movie is not accessible
-        but there are cases where they are accessible regardless of the `adjaraId`,
+        but there are cases where they are inaccessible regardless of the `adjaraId`,
         those cases usually involve content taken down due to DMCA strikes.
     */
     return (
