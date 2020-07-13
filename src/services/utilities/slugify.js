@@ -15,9 +15,11 @@ function slugify(title) {
     const titleArray = title.toLowerCase().split(" ")
 
     const slug = titleArray.map(element => {
-                    if ( arrayContainsElementsOfAnother( element.split(""), forbiddenCharacters ) && element.split("").length !== 1 ) {
-                        return element.split("").filter(c => !forbiddenCharacters.includes(c)).join("")
-                    } else if ( arrayContainsElementsOfAnother( element.split(""), forbiddenCharacters ) && element.split("").length === 1 ) {
+                    const [elementArray, elementArrayLength] = [element.split(""), element.split("").length]
+                    
+                    if ( arrayContainsElementsOfAnother( elementArray, forbiddenCharacters ) && elementArrayLength !== 1 ) {
+                        return elementArray.filter(c => !forbiddenCharacters.includes(c)).join("")
+                    } else if ( arrayContainsElementsOfAnother( elementArray, forbiddenCharacters ) && elementArrayLength === 1 ) {
                         return '';
                     } else {
                         return element;
