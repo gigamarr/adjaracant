@@ -40,13 +40,23 @@ class WatchPage extends React.Component {
                                 "volumePanel",
                                 "progressControl",
                                 "remainingTimeDisplay",
-                                "fullscreenToggle"
+                                "qualitySelector",
+                                "fullscreenToggle",
                             ]
                         },
-                        sources: [{
-                            src: response.data.data[0].files[0].files[0].src,
-                            type: "video/mp4"
-                        }]
+                        sources: [
+                            {
+                                src: response.data.data[0].files[0].files[0].src,
+                                type: "video/mp4",
+                                label: '720'
+                            },
+
+                            {
+                                src: response.data.data[0].files[0].files[0].src,
+                                type: "video/mp4",
+                                label: '480'
+                            }
+                        ]
                     },
                     movieDetails: response
                 })

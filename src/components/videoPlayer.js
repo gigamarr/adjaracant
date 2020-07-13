@@ -3,6 +3,7 @@ import videojs from 'video.js';
 
 /* ---------- */
 import './styles/videoPlayer.scss';
+import '@silvermine/videojs-quality-selector/src/sass/quality-selector.scss';
 /* ---------- */
 
 class VideoPlayer extends Component {
@@ -14,6 +15,7 @@ class VideoPlayer extends Component {
     }
 
     componentDidMount() {
+        require('@silvermine/videojs-quality-selector')(videojs)
         this.player = videojs(this.videoNode, this.props)
     }
 
