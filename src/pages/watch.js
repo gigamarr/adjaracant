@@ -34,6 +34,15 @@ class WatchPage extends React.Component {
                     videoJsOptions: {
                         autoplay: false,
                         controls: true,
+                        controlBar: {
+                            children: [
+                                "playToggle",
+                                "volumePanel",
+                                "progressControl",
+                                "remainingTimeDisplay",
+                                "fullscreenToggle"
+                            ]
+                        },
                         sources: [{
                             src: response.data.data[0].files[0].files[0].src,
                             type: "video/mp4"
