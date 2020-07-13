@@ -31,7 +31,7 @@ class WatchPage extends React.Component {
             adjaranetService.getFiles(response.data.data.id)
             .then(response => {
                 
-                const sources = this.getSources(response)
+                const sources = this.getEpisodeSources(response)
 
 
                 this.setState({
@@ -45,7 +45,7 @@ class WatchPage extends React.Component {
                                 "progressControl",
                                 "remainingTimeDisplay",
                                 "qualitySelector",
-                                "fullscreenToggle",
+                                "fullscreenToggle"
                             ]
                         },
                         // sources: [
@@ -86,30 +86,28 @@ class WatchPage extends React.Component {
         return matchingTitles[0] || 'title not matched';
     }
 
-    getSources(response) {
+    getEpisodeSources(response, index=0) {
 
-        const src = response.data.data.map(episode => {
-                        const episodeSources = []
+        /*  index is the index of an episode, by default, if source is movie, there will be only one index, which is 0
+            if it is a TV show with multiple episodes, we will change the index attribute accordingly, but regardless of the
+            content type, we want to grab `0` index on page load first. */
 
-                        episode.files.forEach(file => {
-                            const langSources = {
-                                lang: file.lang,
-                                sources: [
+        const sources = []
 
-                                ]
-                            }
+        response.data.data[index].files.forEach(element => {
+            
+            element.files.forEach(file => {
+                sources.push({
+                    src: file.src, 
+                    quality: file.quality, 
+                    label: `${element.lang} - ${file.quality}`,
+                    type: "video/mp4"
+                })
+            })
 
-                            file.files.forEach(source => {
-                                langSources.sources.push({src: source.src, label: source.quality, type: "video/mp4"})
-                            })
+        })
 
-                            episodeSources.push(langSources)
-                        })
-                        return episodeSources[0];
-                    })
-
-        console.log(src)
-        return src[0].sources
+        return sources;
     }
 }
 
