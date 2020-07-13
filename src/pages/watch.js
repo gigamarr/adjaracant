@@ -56,9 +56,8 @@ class WatchPage extends React.Component {
 }
 
 function deslugify(slug) {
-    return slug.replace("-", " ")
+    return slug.split("-").join(" ")
 }
-
 /* ---------- */
 
 export default withRouter(WatchPage);

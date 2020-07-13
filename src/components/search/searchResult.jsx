@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import slugify from 'services/utilities/slugify';
 
 /* ---------- */
 import './styles/searchResult.scss';
@@ -33,13 +34,10 @@ function SearchResult(props) {
     )
 }
 
-function slugify(title) {
-    return title.toLowerCase().replace(" ", "-")
-}
-
 function calculateClassName(props, hoverState) {
     return `search-result${props.last ? ' last' : ''}${props.hoverState ? ' parent-hovered' : ''}${hoverState ? ' self-hovered':''}${props.onlyChild ? ' only-child':''}`
 }
+
 /* ---------- */
 
 export default SearchResult;
