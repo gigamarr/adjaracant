@@ -75,7 +75,6 @@ class Home extends Component {
                 
                 this.resetSearchForm()
                 
-                console.log(this.state)
             })
         }
     }
