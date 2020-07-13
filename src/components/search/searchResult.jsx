@@ -16,7 +16,7 @@ function SearchResult(props) {
     */
     return (
         <React.Fragment>
-            {adjaraId !== null && (
+            {adjaraId && (
                 <Link to={`/watch/${adjaraId}/${slugify(title)}`} className="search-result-anchor">
                     <div className={calculateClassName(props, hoverState)} 
                         onMouseEnter={() => setHoverState(true)}
