@@ -7,12 +7,6 @@ import '@silvermine/videojs-quality-selector/src/sass/quality-selector.scss';
 /* ---------- */
 
 class VideoPlayer extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            backgroundImage: this.props.movieDetails.data.data[0].covers['1920'],
-        }
-    }
 
     componentDidMount() {
         require('@silvermine/videojs-quality-selector')(videojs)
@@ -27,7 +21,7 @@ class VideoPlayer extends Component {
 
     render() {
         return (
-            <div id="video-player-container" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${this.state.backgroundImage})`}}>
+            <div id="video-player-container" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${this.props.backgroundImage})`}}>
                 
                 <div data-vjs-player>
                     <video ref={ node => this.videoNode = node } className="video-js"></video>

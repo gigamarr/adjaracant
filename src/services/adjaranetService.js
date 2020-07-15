@@ -19,9 +19,9 @@ export default {
         return apiClient.get(`get-data/${movieId}`)
     },
 
-    getFiles(movieId) {
+    getFiles(movieId, seasonIndex=1) {
         // this one returns media source files
         // needs `id` not `adjaraId`
-        return apiClient.get(`get-files/${movieId}`)
+        return apiClient.get(`get-files/${movieId}/${seasonIndex}`)
     }
 }

@@ -1,11 +1,10 @@
 footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
     color: grey;
     padding: 0.2rem 0.5rem;
     font-size: 0.7rem;
+    position: absolute;
+    bottom: 0;
+    height: 2.5rem;
 
     a {
         margin: 0 0.3rem;

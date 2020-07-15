@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 
 @font-face {
-    font-family: 'ExtrasquareMtavruli';
+    font-family: AlkSanet;
     src: url('/fonts/alk-sanet.ttf');
 }
 
@@ -9,15 +9,19 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', 'ExtrasquareMtavruli', sans-serif;
+    font-family: 'Montserrat', 'AlkSanet', sans-serif;
 }
 
 body {
     background-color: #242424;
     font-size: 62.5%;
-    min-height: 100%;
 }
 
 #root {
-    height: 100%;
+    position: relative;
+    min-height: 100vh;
+}
+
+#wrapper {
+    padding-bottom: 2.5rem;
 }

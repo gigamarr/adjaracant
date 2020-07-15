@@ -7,12 +7,15 @@ import './styles/searchResults.scss';
 /* ---------- */
 
 function SearchResults(props) {    
+
     const [hoverState, setHoverState] = useState(false);
     
     return (
         <div id="search-results-container">
             {props.movies.length > 0 && (
-                <div id="clear-results" onClick={props.onClear}>clear</div>
+                <div id="clear-results-container">
+                    <div id="clear" onClick={props.onClear}>clear</div>
+                </div>
             )}
 
             {props.movies.length > 0 && (
@@ -37,6 +40,7 @@ function SearchResults(props) {
             )}
         </div>
     )
+    
 }
 
 /* ---------- */

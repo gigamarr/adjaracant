@@ -7,16 +7,19 @@ $scrollbar-border-radius: 0.2rem;
     position: relative;
     right: 1.9rem;
 
-    #clear-results {
+    #clear-results-container {
         color: white;
-        cursor: pointer;
         width: 25rem;
         display: flex;
         justify-content: flex-end;
 
-        &:hover {
-            text-decoration: underline;
+        #clear {
+            cursor: pointer;
+            &:hover {
+                text-decoration: underline;
+            }
         }
+
     }
 
     #search-results {
