@@ -1,5 +1,6 @@
 import React from 'react';
 import Season from './season';
+
 /* ---------- */
 import './styles/seasons.scss';
 /* ---------- */

@@ -89,13 +89,17 @@ class WatchPage extends React.Component {
 
                         <div id="episodes-container">
                             {this.state.episodes.map((episode, index) => {
-                                return <Episode key={index} episode={episode} />
+                                return <Episode key={index} episode={episode} changeSource={this.changeSource} />
                             })}
                         </div>
                     </React.Fragment>
                 )}
             </React.Fragment>
         )
+    }
+
+    changeSource = (episodeIndex) => {
+        console.log("changing source to", episodeIndex)
     }
 
     matchTitle(data, slug) {
