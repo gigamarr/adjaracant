@@ -9,13 +9,13 @@ function Episode(props) {
     const [hovered, setHovered] = useState(false);
 
     return (
-        <div className={`episode${hovered ? ' hovered' : ''}`} 
+        <div className={`episode${hovered ? ' hovered' : ''}${props.active ? ' active-episode' : ''}`} 
              onMouseEnter={() => setHovered(true)} 
              onMouseLeave={() => setHovered(false)}
              onClick={() => props.changeSource(episodeNumber)}
         >
             <div className="episode-name">
-                Ep. {episodeNumber} - {title || 'title not found'}
+                Ep. {episodeNumber} - {title || `Episode ${episodeNumber}`}
             </div>
 
         </div>

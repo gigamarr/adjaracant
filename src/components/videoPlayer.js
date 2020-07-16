@@ -19,6 +19,10 @@ class VideoPlayer extends Component {
         }
     }
 
+    changeSource(source) {
+        this.player.src(source)
+    }
+
     render() {
         return (
             <div id="video-player-container" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${this.props.backgroundImage})`}}>

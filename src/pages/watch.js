@@ -15,6 +15,7 @@ import './styles/watch.scss';
 class WatchPage extends React.Component {
     constructor(props) {
         super(props)
+        this.player = React.createRef();
         this.state = {
             id: null,
             isTvShow: null,
@@ -22,9 +23,9 @@ class WatchPage extends React.Component {
             seasons: null,
             episodes: null,
             activeSeason: 1,
+            activeEpisode: 0,
             backgroundImage: null,
             videoJsOptions: null,
-            switching: true
         }
     }
 
@@ -77,7 +78,7 @@ class WatchPage extends React.Component {
             <React.Fragment>
                 <NavBar />
                 {this.state.videoJsOptions && (
-                    <VideoPlayer {...this.state.videoJsOptions} backgroundImage={this.state.backgroundImage} title={this.state.title} />
+                    <VideoPlayer ref={this.player} {...this.state.videoJsOptions} backgroundImage={this.state.backgroundImage} title={this.state.title} />
                 )}
 
                 {this.state.isTvShow && this.state.episodes && (
@@ -89,7 +90,11 @@ class WatchPage extends React.Component {
 
                         <div id="episodes-container">
                             {this.state.episodes.map((episode, index) => {
-                                return <Episode key={index} episode={episode} changeSource={this.changeSource} />
+                                return <Episode key={index} 
+                                                episode={episode}
+                                                active={this.state.activeEpisode === index}
+                                                changeSource={this.changeSource}
+                                        />
                             })}
                         </div>
                     </React.Fragment>
@@ -99,7 +104,12 @@ class WatchPage extends React.Component {
     }
 
     changeSource = (episodeIndex) => {
-        console.log("changing source to", episodeIndex)
+        // episodes are zero-based unlike from seasons
+        const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
+        this.player.current.changeSource(sources)
+        this.setState({
+            activeEpisode: episodeIndex-1
+        })
     }
 
     matchTitle(data, slug) {
