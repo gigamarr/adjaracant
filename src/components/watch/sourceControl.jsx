@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Seasons from 'components/watch/seasons';
 import Episode from 'components/watch/episode';
-import Loader from 'components/loader';
+// import Loader from 'components/loader';
 
 
 /* ---------- */
@@ -21,27 +21,24 @@ function SourceControl(props) {
 
 
 
-        <div id="episodes-container"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-        >
-            {props.loading && (
-                <div id="loader-container">
-                    <Loader />
-                </div>
-            )}
-
-            {!props.loading && (
-                <React.Fragment>
-                    {props.episodes.map((episode, index) => {
-                        return <Episode key={index} 
-                                        episode={episode}
-                                        changeSource={props.changeSource}
-                                        parentHovered={hovered}
-                                />
-                    })}
-                </React.Fragment>
-            )}
+        <div id="episode-switcher">
+            <div id="episodes-container"
+                 onMouseEnter={() => setHovered(true)}
+                 onMouseLeave={() => setHovered(false)}
+            >
+                {!props.loading && (
+                    <React.Fragment>
+                        {props.episodes.map((episode, index) => {
+                            return <Episode key={index} 
+                                            episode={episode}
+                                            changeSource={props.changeSource}
+                                            last={props.episodes.length-1 === index}
+                                            parentHovered={hovered}
+                                    />
+                        })}
+                    </React.Fragment>
+                )}
+            </div>
         </div>
     </React.Fragment>
     )

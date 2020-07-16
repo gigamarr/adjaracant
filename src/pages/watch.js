@@ -20,7 +20,7 @@ class WatchPage extends React.Component {
             activeEpisode: 0,
             backgroundImage: null,
             videoJsOptions: null,
-            loading: true
+            episodesLoading: false
         }
     }
 
@@ -61,8 +61,7 @@ class WatchPage extends React.Component {
                             ]
                         },
                         sources: firstEpisodeSources
-                    },
-                    loading: false
+                    }
                 })
 
             })
@@ -87,7 +86,7 @@ class WatchPage extends React.Component {
                         episodes={this.state.episodes}
                         changeSeason={this.changeSeason}
                         changeSource={this.changeSource}
-                        loading={this.state.loading}
+                        loading={this.state.episodesLoading}
                     />
                 )}
             </React.Fragment>
@@ -142,7 +141,7 @@ class WatchPage extends React.Component {
     changeSeason = (seasonIndex) => {
         if (seasonIndex !== this.state.activeSeason) {
             this.setState({
-                loading: true
+                episodesLoading: true
             })
     
             const activeSeason = seasonIndex
@@ -157,7 +156,7 @@ class WatchPage extends React.Component {
                 this.setState({
                     episodes,
                     activeSeason,
-                    loading: false
+                    episodesLoading: false
                 })
     
                 this.changeSource(1)

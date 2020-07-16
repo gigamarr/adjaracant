@@ -1,9 +1,10 @@
 .episode {
-    margin: 1rem;
     width: 15rem;
     height: 10rem;
     cursor: pointer;
     transition: 0.2s;
+    margin-right: 1rem;
+    display: inline-block;
 
     .episode-cover {
         height: 80%;
@@ -29,4 +30,8 @@
         }
     }
 
+}
+
+.last-episode {
+    margin-right: 0;
 }

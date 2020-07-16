@@ -1,13 +1,14 @@
-#episodes-container {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+#episode-switcher {
     transition: 0.2s opacity;
-    width: 70%;
+    display: flex;
+    padding: 2rem;
+    justify-content: center;
 
-    #loader-container {
-        width: 100%;
-        text-align: center;
+    #episodes-container {
+        width: 90%;
+        white-space: nowrap;
+        overflow-x: hidden;
+        min-height: 10rem;
     }
 }
 
