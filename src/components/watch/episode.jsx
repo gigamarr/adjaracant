@@ -5,17 +5,27 @@ import './styles/episode.scss';
 /* --------- */
 
 function Episode(props) {
-    const { episode: episodeNumber, title } = props.episode;
     const [hovered, setHovered] = useState(false);
+    const backgroundImage = props.episode.covers['1920'];
+    const { episode: episodeNumber, title } = props.episode;
 
     return (
-        <div className={`episode${hovered ? ' hovered' : ''}${props.active ? ' active-episode' : ''}`} 
+        <div className={`episode${props.parentHovered ? ' parent-hovered' : ''}${hovered ? ' self-hovered' : ''}`}
              onMouseEnter={() => setHovered(true)} 
              onMouseLeave={() => setHovered(false)}
              onClick={() => props.changeSource(episodeNumber)}
         >
-            <div className="episode-name">
-                Ep. {episodeNumber} - {title || `Episode ${episodeNumber}`}
+            <div className="episode-cover">
+                <img src={backgroundImage} alt="episode-cover"/>
+            </div>
+
+            <div className="episode-textual-data">
+                <div className="episode-index">
+                    Episode. {episodeNumber}
+                </div>
+                <div className="episode-title">
+                    {title || "UNTITLED"}
+                </div>
             </div>
 
         </div>

@@ -26,6 +26,7 @@ class WatchPage extends React.Component {
             activeEpisode: 0,
             backgroundImage: null,
             videoJsOptions: null,
+            episodesHovered: false
         }
     }
 
@@ -88,12 +89,16 @@ class WatchPage extends React.Component {
                                 changeSeason={this.changeSeason}
                         />
 
-                        <div id="episodes-container">
+                        <div id="episodes-container"
+                             onMouseEnter={() => this.setState({episodesHovered: true})}
+                             onMouseLeave={() => this.setState({episodesHovered: false})}
+                        >
                             {this.state.episodes.map((episode, index) => {
                                 return <Episode key={index} 
                                                 episode={episode}
                                                 active={this.state.activeEpisode === index}
                                                 changeSource={this.changeSource}
+                                                parentHovered={this.state.episodesHovered}
                                         />
                             })}
                         </div>
@@ -160,6 +165,8 @@ class WatchPage extends React.Component {
                 episodes,
                 activeSeason
             })
+
+            this.changeSource(1)
         })
 
     }
