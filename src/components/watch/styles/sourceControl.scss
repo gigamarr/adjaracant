@@ -1,0 +1,13 @@
+#episodes-container {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    transition: 0.2s opacity;
+    width: 70%;
+
+    #loader-container {
+        width: 100%;
+        text-align: center;
+    }
+}
+

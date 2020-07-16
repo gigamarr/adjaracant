@@ -16,7 +16,7 @@ function Episode(props) {
              onClick={() => props.changeSource(episodeNumber)}
         >
             <div className="episode-cover">
-                <img src={backgroundImage} alt="episode-cover"/>
+                <img src={backgroundImage || '/unavailable.png'} alt="episode-cover"/>
             </div>
 
             <div className="episode-textual-data">

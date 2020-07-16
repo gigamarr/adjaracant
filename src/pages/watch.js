@@ -3,14 +3,8 @@ import { withRouter } from 'react-router';
 import adjaranetService from 'services/adjaranetService';
 import VideoPlayer from 'components/videoPlayer';
 import NavBar from 'components/navBar';
+import SourceControl from 'components/watch/sourceControl';
 import slugify from 'services/utilities/slugify';
-import Seasons from 'components/watch/seasons';
-import Episode from 'components/watch/episode';
-
-/* ---------- */
-import './styles/watch.scss';
-/* ---------- */
-
 
 class WatchPage extends React.Component {
     constructor(props) {
@@ -26,7 +20,7 @@ class WatchPage extends React.Component {
             activeEpisode: 0,
             backgroundImage: null,
             videoJsOptions: null,
-            episodesHovered: false
+            loading: true
         }
     }
 
@@ -47,11 +41,11 @@ class WatchPage extends React.Component {
                 const firstEpisodeSources = this.getEpisodeSources(response.data.data)
 
                 this.setState({
-                    episodes: response.data.data,
                     id: id,
+                    isTvShow: isTvShow,
                     title: matchingTitle,
                     seasons: seasonsLength,
-                    isTvShow: isTvShow,
+                    episodes: response.data.data,
                     backgroundImage: backgroundImage,
                     videoJsOptions: {
                         autoplay: false,
@@ -67,8 +61,10 @@ class WatchPage extends React.Component {
                             ]
                         },
                         sources: firstEpisodeSources
-                    }
+                    },
+                    loading: false
                 })
+
             })
         })
 
@@ -78,31 +74,21 @@ class WatchPage extends React.Component {
         return (
             <React.Fragment>
                 <NavBar />
+
                 {this.state.videoJsOptions && (
                     <VideoPlayer ref={this.player} {...this.state.videoJsOptions} backgroundImage={this.state.backgroundImage} title={this.state.title} />
                 )}
 
-                {this.state.isTvShow && this.state.episodes && (
-                    <React.Fragment>
-                        <Seasons seasons={Array(this.state.seasons).fill('season')}
-                                activeSeason={this.state.activeSeason}
-                                changeSeason={this.changeSeason}
-                        />
 
-                        <div id="episodes-container"
-                             onMouseEnter={() => this.setState({episodesHovered: true})}
-                             onMouseLeave={() => this.setState({episodesHovered: false})}
-                        >
-                            {this.state.episodes.map((episode, index) => {
-                                return <Episode key={index} 
-                                                episode={episode}
-                                                active={this.state.activeEpisode === index}
-                                                changeSource={this.changeSource}
-                                                parentHovered={this.state.episodesHovered}
-                                        />
-                            })}
-                        </div>
-                    </React.Fragment>
+                {this.state.isTvShow && this.state.episodes && (
+                    <SourceControl
+                        seasons={this.state.seasons}
+                        activeSeason={this.state.activeSeason}
+                        episodes={this.state.episodes}
+                        changeSeason={this.changeSeason}
+                        changeSource={this.changeSource}
+                        loading={this.state.loading}
+                    />
                 )}
             </React.Fragment>
         )
@@ -110,11 +96,13 @@ class WatchPage extends React.Component {
 
     changeSource = (episodeIndex) => {
         // episodes are zero-based unlike from seasons
-        const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
-        this.player.current.changeSource(sources)
-        this.setState({
-            activeEpisode: episodeIndex-1
-        })
+        if (episodeIndex-1 !== this.state.activeEpisode) {
+                const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
+                this.player.current.changeSource(sources)
+                this.setState({
+                    activeEpisode: episodeIndex-1
+                })
+        }
     }
 
     matchTitle(data, slug) {
@@ -129,7 +117,7 @@ class WatchPage extends React.Component {
             if it is a TV show with multiple episodes, we will change the index attribute accordingly, but regardless of the
             content type, we want to grab `0` index on page load first.
 
-            both season with value '0' and with value '1' return first season.
+            both seasons - with value '0' and with value '1' return first season.
             
         */
 
@@ -152,23 +140,29 @@ class WatchPage extends React.Component {
     }
 
     changeSeason = (seasonIndex) => {
-        const activeSeason = seasonIndex
-        const episodes = []
-
-        adjaranetService.getFiles(this.state.id, seasonIndex)
-        .then(response => {
-            response.data.data.forEach(episode => {
-                episodes.push(episode)
-            })
-
+        if (seasonIndex !== this.state.activeSeason) {
             this.setState({
-                episodes,
-                activeSeason
+                loading: true
             })
-
-            this.changeSource(1)
-        })
-
+    
+            const activeSeason = seasonIndex
+            const episodes = []
+    
+            adjaranetService.getFiles(this.state.id, seasonIndex)
+            .then(response => {
+                response.data.data.forEach(episode => {
+                    episodes.push(episode)
+                })
+    
+                this.setState({
+                    episodes,
+                    activeSeason,
+                    loading: false
+                })
+    
+                this.changeSource(1)
+            })
+        }
     }
 }
 
