@@ -41,23 +41,23 @@ header {
         &:hover {
             border: $search-icon-hovered-border;
         }
-    }
 
-    label.searching {
-        animation: searching 0.3s infinite;
+        &.searching {
+            animation: searching 0.3s infinite;
 
-        @keyframes searching {
-            from { border: $search-icon-default-border }
-            to { border: $search-icon-hovered-border }
+            @keyframes searching {
+                from { border: $search-icon-default-border }
+                to { border: $search-icon-hovered-border }
+            }
         }
-    }
 
-    label.completed {
-        animation: completion 1s;
+        &.completed {
+            animation: completion 1s;
 
-        @keyframes completion {
-            from { border: 1px solid lightgreen }
-            to { border: $search-icon-default-border }
+            @keyframes completion {
+                from { border: 1px solid lightgreen }
+                to { border: $search-icon-default-border }
+            }
         }
     }
 

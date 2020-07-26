@@ -1,14 +1,14 @@
 footer {
     color: grey;
-    padding: 0.2rem 0.5rem;
-    font-size: 0.7rem;
+    padding: 0.1rem;
+    font-size: 0.7vw;
     position: absolute;
     bottom: 0;
 
     a {
-        margin: 0 0.3rem;
+        margin: 0 0.3vw;
         position: relative;
-        top: 0.05rem;
+        top: 0.05vw;
 
         svg.github {
                 &:hover {

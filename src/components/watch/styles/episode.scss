@@ -1,14 +1,10 @@
 .episode {
-    width: 15rem;
-    height: 10rem;
+    width: 18vw;
     cursor: pointer;
     transition: 0.2s;
-    margin-right: 1rem;
     display: inline-block;
 
     .episode-cover {
-        height: 80%;
-        background-color: #181818;
 
         img {
             object-fit: cover;
@@ -22,16 +18,12 @@
         color: #ccc;
 
         .episode-index {
-            font-size: 0.5rem;
+            font-size: 0.8vw;
         }
 
         .episode-title {
-            font-size: 0.7rem;
+            font-size: 1vw;
         }
     }
 
-}
-
-.last-episode {
-    margin-right: 0;
 }

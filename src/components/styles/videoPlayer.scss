@@ -1,8 +1,7 @@
 #video-player-container {
     display: flex;
     align-items: center;
-    padding: 2rem;
-    height: 40rem;
+    padding: 1vw;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -24,5 +23,18 @@
 
 .video-js {
     height: 100%;
-    width: 95%;
+    width: 90vw;
+    padding-bottom: 40%;
+
+    .vjs-big-play-button {
+        font-size: 3.5vw;
+        height: 6vw;
+        width: 10vw;
+        border-radius: 0.6vw;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 1.5vw;
+        left: 1.5vw;
+    }
 }
