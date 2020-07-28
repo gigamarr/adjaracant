@@ -83,6 +83,7 @@ class WatchPage extends React.Component {
                     <SourceControl
                         seasons={this.state.seasons}
                         activeSeason={this.state.activeSeason}
+                        activeEpisode={this.state.activeEpisode}
                         episodes={this.state.episodes}
                         changeSeason={this.changeSeason}
                         changeSource={this.changeSource}
@@ -95,13 +96,11 @@ class WatchPage extends React.Component {
 
     changeSource = (episodeIndex) => {
         // episodes are zero-based unlike from seasons
-        if (episodeIndex-1 !== this.state.activeEpisode) {
-                const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
-                this.player.current.changeSource(sources)
-                this.setState({
-                    activeEpisode: episodeIndex-1
-                })
-        }
+        const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
+        this.player.current.changeSource(sources)
+        this.setState({
+            activeEpisode: episodeIndex-1
+        })
     }
 
     matchTitle(data, slug) {

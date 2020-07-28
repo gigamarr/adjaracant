@@ -10,7 +10,7 @@ function Episode(props) {
     const { episode: episodeNumber, title } = props.episode;
 
     return (
-        <div className={`episode${props.parentHovered ? ' parent-hovered' : ''}${hovered ? ' self-hovered' : ''}${props.last ? ' last-episode' : ''}`}
+        <div className={`episode${props.activeEpisode ? ' active' : ''}${props.parentHovered ? ' parent-hovered' : ''}${hovered ? ' self-hovered' : ''}${props.last ? ' last-episode' : ''}`}
              onMouseEnter={() => setHovered(true)} 
              onMouseLeave={() => setHovered(false)}
              onClick={() => props.changeSource(episodeNumber)}

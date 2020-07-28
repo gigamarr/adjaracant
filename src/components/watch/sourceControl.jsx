@@ -64,6 +64,7 @@ class SourceControl extends Component {
                                                             episode={episode}
                                                             changeSource={this.props.changeSource}
                                                             last={this.props.episodes.length-1 === index}
+                                                            activeEpisode={this.props.activeEpisode === index}
                                                             parentHovered={this.state.hovered}
                                                     />
                                         })}
