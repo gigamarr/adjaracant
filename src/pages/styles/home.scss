@@ -4,11 +4,14 @@
     padding: 1.5rem;
     
     img {
-        height: 8vw;
+        height: 6vw;
 
         @media only screen and (max-width: 600px) {
             height: 17vw;
         }
 
+        @media only screen and (min-width: 768px) and (max-width: 900px) {
+            height: 10vw;
+        }
     }
 }
