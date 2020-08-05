@@ -4,22 +4,18 @@
     align-items: center;
     padding: 3vw 0;
     justify-content: center;
-    background: #181818;
+    background: #202020;
 
     #episodes-container {
         width: 90%;
         white-space: nowrap;
-        overflow-x: auto;
+        overflow-x: hidden;
         
         #episodes {
             position: relative;
             transition: 0.5s linear;
         }
 
-    }
-
-    ::-webkit-scrollbar {
-        display: none;
     }
 
     svg {
@@ -48,9 +44,11 @@
             right: 0;
         }
     }
+}
 
-    .loading {
-        display: flex;
-        justify-content: center;
-    }
+.loading {
+    background: #202020;
+    display: flex;
+    justify-content: center;
+    min-height: 19.2vw;
 }

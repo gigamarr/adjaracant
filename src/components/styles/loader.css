@@ -1,29 +1,17 @@
-/* from https://loading.io/css/ */
+.loader {
+  font-size: 8vw;
+  color: whitesmoke;
+}
 
-.lds-dual-ring {
-    display: inline-block;
-    width: 2vw;
-    height: 2vw;
-    padding-bottom: 20vh;
-  }
-
-  .lds-dual-ring:after {
-    content: " ";
-    display: block;
-    width: 5vw;
-    height: 5vw;
-    margin: 1vw;
-    border-radius: 50%;
-    border: .5vw solid #fff;
-    border-color: #fff transparent #fff transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
-  }
-  @keyframes lds-dual-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+.loader::after {
+  content: ".";
+  animation: loading 0.2s infinite;
+}
   
+@keyframes loading {
+  20% { content: "." }
+  40% { content: ".." }
+  60% { content: "..." }
+  80% { content: "..." }
+  100% { content: "..." }
+}

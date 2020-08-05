@@ -4,8 +4,7 @@ $scrollbar-border-radius: 0.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: relative;
-    right: 1.9rem;
+
 
     #clear-results-container {
         color: white;
@@ -13,18 +12,25 @@ $scrollbar-border-radius: 0.2rem;
         display: flex;
         justify-content: flex-end;
 
+        @media only screen and (max-width: 600px) {
+            width: 18rem;
+        }
+
         #clear {
             cursor: pointer;
             &:hover {
                 text-decoration: underline;
             }
         }
-
     }
 
     #search-results {
         max-height: 30.95rem;
         width: 25rem;
         overflow: hidden;
+
+        @media only screen and (max-width: 600px) {
+            width: 18rem;
+        }
     }
 }

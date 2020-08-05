@@ -4,7 +4,7 @@ import './styles/loader.css'
 
 function Loader() {
     return (
-        <div className="lds-dual-ring"></div>
+        <div className="loader"></div>
     )
 }
 

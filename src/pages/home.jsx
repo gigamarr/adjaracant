@@ -13,8 +13,7 @@ class Home extends Component {
         this.state = {
             input: '',
             results: [],
-            searchInProcess: false,
-            searchCompleted: false
+            searchInProcess: false
         }
     }
 
@@ -40,7 +39,6 @@ class Home extends Component {
                 <SearchBar  onInputChange={this.setQuery} 
                             onSearch={this.search} 
                             searchInProcess={this.state.searchInProcess} 
-                            searchCompleted={this.state.searchCompleted}
                 />
                 <SearchResults movies={this.state.results} onClear={this.clearSearchResults} />
             </React.Fragment>
@@ -69,8 +67,7 @@ class Home extends Component {
                 this.setState({
                     input: '',
                     results: results, // or just {results}, shorthand for when key and value are same
-                    searchInProcess: false,
-                    searchCompleted: true
+                    searchInProcess: false
                 })
                 
                 this.resetSearchForm()

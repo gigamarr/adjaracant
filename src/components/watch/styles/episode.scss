@@ -5,16 +5,17 @@
     display: inline-block;
 
     .episode-cover {
+        height: 10vw;
 
         img {
             object-fit: cover;
+            width: 95%;
             height: 100%;
-            width: 100%;
         }
     }
 
     .episode-textual-data {
-        padding: 0.2rem;
+        padding: 0.5vw;
         color: #ccc;
 
         .episode-index {
@@ -23,11 +24,13 @@
 
         .episode-title {
             font-size: 1vw;
-        }
-    }
 
-    &.active.episode-textual-data.episode-title {
-        display: none;
+            &.active::after {
+                content: " (Playing)";
+                font-size: 0.5vw;
+                color: cornflowerblue;
+            }
+        }
     }
 
 }

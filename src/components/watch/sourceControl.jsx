@@ -41,14 +41,19 @@ class SourceControl extends Component {
                         changeSeason={this.props.changeSeason}
                 />
         
+                {this.props.loading && (
+                    <div class="loading">
+                        <Loader />
+                    </div>
+                )}
         
-        
-                <div id="episode-switcher">
-                    <FontAwesomeIcon id="slide-right" 
-                                     icon={faCaretLeft} 
-                                     onClick={() => this.slideRight()}
-                                     className={this.state.slidePosition === 1 ? 'hidden' : ''}
-                    />       
+                {!this.props.loading && (
+                    <div id="episode-switcher">
+                        <FontAwesomeIcon id="slide-right" 
+                                        icon={faCaretLeft} 
+                                        onClick={() => this.slideRight()}
+                                        className={this.state.slidePosition === 1 ? 'hidden' : ''}
+                        />       
 
                         <div id="episodes-container"
                             onMouseEnter={() => this.setState({hovered: true})}
@@ -57,35 +62,28 @@ class SourceControl extends Component {
                             <div id="episodes"
                                 style={{left: `${this.state.left}vw`}}
                             >
-                                {!this.props.loading && (
-                                    <React.Fragment>
-                                        {this.props.episodes.map((episode, index) => {
-                                            return <Episode key={index} 
-                                                            episode={episode}
-                                                            changeSource={this.props.changeSource}
-                                                            last={this.props.episodes.length-1 === index}
-                                                            activeEpisode={this.props.activeEpisode === index}
-                                                            parentHovered={this.state.hovered}
-                                                    />
-                                        })}
-                                    </React.Fragment>
-                                )}
-
-                                {this.props.loading && (
-                                    <div className="loading">
-                                        <Loader />
-                                    </div>
-                                )}
+                                <React.Fragment>
+                                    {this.props.episodes.map((episode, index) => (
+                                        <Episode key={index} 
+                                                        episode={episode}
+                                                        changeSource={this.props.changeSource}
+                                                        last={this.props.episodes.length-1 === index}
+                                                        activeEpisode={this.props.activeEpisode === index}
+                                                        parentHovered={this.state.hovered}
+                                                />
+                                    ))}
+                                </React.Fragment>
                             </div>
         
                         </div>
                         
-                    <FontAwesomeIcon id="slide-left" 
-                                     icon={faCaretRight} 
-                                     onClick={() => this.slideLeft()}
-                                     className={this.state.slidePosition === this.state.slideLimit ? 'hidden' : ''}
-                    />
-                </div>
+                        <FontAwesomeIcon id="slide-left" 
+                                        icon={faCaretRight} 
+                                        onClick={() => this.slideLeft()}
+                                        className={this.state.slidePosition === this.state.slideLimit ? 'hidden' : ''}
+                        />
+                    </div>
+                )}
             </React.Fragment>
         )
     }
