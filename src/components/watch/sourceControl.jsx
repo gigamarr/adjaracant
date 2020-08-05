@@ -3,7 +3,6 @@ import Seasons from 'components/watch/seasons';
 import Episode from 'components/watch/episode';
 import Loader from 'components/loader';
 
-
 /* ---------- */
 import './styles/sourceControl.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
