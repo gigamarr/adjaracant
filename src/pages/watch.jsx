@@ -20,8 +20,7 @@ class WatchPage extends React.Component {
             activeEpisode: 0,
             backgroundImage: null,
             videoJsOptions: null,
-            episodesLoading: false,
-            redirect: "/watch/625/fight-club"
+            episodesLoading: false
         }
     }
 
@@ -32,7 +31,7 @@ class WatchPage extends React.Component {
         .then(response => {
             const id = response.data.data.id;
             const matchingTitle = this.matchTitle(response.data.data, this.props.match.params.title);
-            const seasonsLength = response.data.data.seasons ? response.data.data.seasons.length : null;
+            const seasonsLength = response.data.data.seasons ? response.data.data.seasons.data.length : null;
             const isTvShow = response.data.data.isTvShow;
             const backgroundImage = response.data.data.covers.data['1920'];
 
