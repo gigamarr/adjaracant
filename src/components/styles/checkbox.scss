@@ -1,0 +1,12 @@
+.checkbox {
+    height: 1.2vw;
+    width: 1.2vw;
+    background: white;
+    border: .1vw solid grey;
+    cursor: pointer;
+
+    &.checked {
+        background: #2196F3;
+        border-color: darkorange;
+    }
+}

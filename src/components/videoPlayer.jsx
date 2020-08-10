@@ -11,6 +11,12 @@ class VideoPlayer extends Component {
     componentDidMount() {
         require('@silvermine/videojs-quality-selector')(videojs)
         this.player = videojs(this.videoNode, this.props)
+        this.player.on('ended', () => {
+            if (this.props.autoplayEpisodes && this.props.activeEpisode+1 !== this.props.episodes.length) {
+                this.props.changeSource(this.props.activeEpisode+2)
+                this.player.play()
+            }
+        })
     }
 
     componentWillUnmount() {

@@ -1,0 +1,15 @@
+.player-options {
+    display: flex;
+    align-items: center;
+    padding: 1vw;
+
+    p {
+        margin-left: .4vw;
+        font-size: 1vw;
+        color: white;
+
+        &.active {
+            font-weight: bold;
+        }
+    }
+}

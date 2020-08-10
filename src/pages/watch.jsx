@@ -3,8 +3,13 @@ import { withRouter } from 'react-router';
 import adjaranetService from 'services/adjaranetService';
 import VideoPlayer from 'components/videoPlayer';
 import NavBar from 'components/navBar';
+import Checkbox from 'components/checkbox';
 import SourceControl from 'components/watch/sourceControl';
 import slugify from 'services/utilities/slugify';
+
+/* ---------- */
+import './styles/watch.scss';
+/* ---------- */
 
 class WatchPage extends React.Component {
     constructor(props) {
@@ -20,7 +25,8 @@ class WatchPage extends React.Component {
             activeEpisode: 0,
             backgroundImage: null,
             videoJsOptions: null,
-            episodesLoading: false
+            episodesLoading: false,
+            autoSwitchEpisodes: false
         }
     }
 
@@ -75,20 +81,36 @@ class WatchPage extends React.Component {
                 <NavBar />
 
                 {this.state.videoJsOptions && (
-                    <VideoPlayer ref={this.player} {...this.state.videoJsOptions} backgroundImage={this.state.backgroundImage} title={this.state.title} />
+                    <VideoPlayer 
+                        ref={this.player} 
+                        {...this.state.videoJsOptions} 
+                        backgroundImage={this.state.backgroundImage} 
+                        title={this.state.title} 
+                        autoplayEpisodes={this.state.autoSwitchEpisodes}
+                        activeEpisode={this.state.activeEpisode}
+                        episodes={this.state.episodes}
+                        changeSource={this.changeSource}
+                    />
                 )}
 
 
                 {this.state.isTvShow && this.state.episodes && (
-                    <SourceControl
-                        seasons={this.state.seasons}
-                        activeSeason={this.state.activeSeason}
-                        activeEpisode={this.state.activeEpisode}
-                        episodes={this.state.episodes}
-                        changeSeason={this.changeSeason}
-                        changeSource={this.changeSource}
-                        loading={this.state.episodesLoading}
-                    />
+                    <React.Fragment>
+                        <div className="player-options">
+                            <Checkbox checked={this.state.autoSwitchEpisodes} onClick={() => this.setState({autoSwitchEpisodes: !this.state.autoSwitchEpisodes})} />
+                            <p className={this.state.autoSwitchEpisodes ? 'active' : ''}>Autoswitch Eps.</p>
+                        </div>
+
+                        <SourceControl
+                            seasons={this.state.seasons}
+                            activeSeason={this.state.activeSeason}
+                            activeEpisode={this.state.activeEpisode}
+                            episodes={this.state.episodes}
+                            changeSeason={this.changeSeason}
+                            changeSource={this.changeSource}
+                            loading={this.state.episodesLoading}
+                        />
+                    </React.Fragment>
                 )}
             </React.Fragment>
         )
@@ -96,6 +118,7 @@ class WatchPage extends React.Component {
 
     changeSource = (episodeIndex) => {
         // episodes are zero-based unlike from seasons
+        console.log(episodeIndex)
         const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
         this.player.current.changeSource(sources)
         this.setState({
