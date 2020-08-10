@@ -118,7 +118,6 @@ class WatchPage extends React.Component {
 
     changeSource = (episodeIndex) => {
         // episodes are zero-based unlike from seasons
-        console.log(episodeIndex)
         const sources = this.getEpisodeSources(this.state.episodes, episodeIndex-1)
         this.player.current.changeSource(sources)
         this.setState({
