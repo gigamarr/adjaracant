@@ -30,49 +30,33 @@ class WatchPage extends React.Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        // There are no lifecycle methods after componentDidMount so it is safe to use  async/await here
 
-        // getting data for first season/first episode for initial load
-        adjaranetService.getData(this.props.match.params.id)
-        .then(response => {
-            const id = response.data.data.id;
-            const matchingTitle = this.matchTitle(response.data.data, this.props.match.params.title);
-            const seasonsLength = response.data.data.seasons ? response.data.data.seasons.data.length : null;
-            const isTvShow = response.data.data.isTvShow;
-            const backgroundImage = response.data.data.covers.data['1920'];
+        let initialState = await this.getInitialData(this.props.match.params.id);
+        let sources = await this.getFirstEpisodeSources(initialState.id);
 
-            adjaranetService.getFiles(id)
-            .then(response => {
-                
-                const firstEpisodeSources = this.getEpisodeSources(response.data.data)
+        this.setState({
 
-                this.setState({
-                    id: id,
-                    isTvShow: isTvShow,
-                    title: matchingTitle,
-                    seasons: seasonsLength,
-                    episodes: response.data.data,
-                    backgroundImage: backgroundImage,
-                    videoJsOptions: {
-                        autoplay: false,
-                        controls: true,
-                        controlBar: {
-                            children: [
-                                "playToggle",
-                                "volumePanel",
-                                "progressControl",
-                                "remainingTimeDisplay",
-                                "qualitySelector",
-                                "fullscreenToggle"
-                            ]
-                        },
-                        sources: firstEpisodeSources
-                    }
-                })
+            ...initialState,
+            episodes: sources.episodes,
+            videoJsOptions: {
+                autoplay: false,
+                controls: true,
+                controlBar: {
+                    children: [
+                        "playToggle",
+                        "volumePanel",
+                        "progressControl",
+                        "remainingTimeDisplay",
+                        "qualitySelector",
+                        "fullscreenToggle"
+                    ]
+                },
+                sources: sources.firstEpisodeSources
+            }
 
-            })
         })
-
     }
 
     render() {
@@ -114,6 +98,36 @@ class WatchPage extends React.Component {
                 )}
             </React.Fragment>
         )
+    }
+
+    getInitialData(adjaraId) {
+        return adjaranetService.getData(adjaraId)
+            .then(response => {
+
+                const id = response.data.data.id;
+                const matchingTitle = this.matchTitle(response.data.data, this.props.match.params.title);
+                const seasons = response.data.data.seasons ? response.data.data.seasons.data.length : null;
+                const isTvShow = response.data.data.isTvShow;
+                const backgroundImage = response.data.data.covers.data['1920'];
+
+                return {
+                    id,
+                    matchingTitle,
+                    seasons,
+                    isTvShow,
+                    backgroundImage
+                }
+            })
+    }
+
+    getFirstEpisodeSources(movieId) {
+        return adjaranetService.getFiles(movieId)
+            .then(response => {
+                const firstEpisodeSources = this.getEpisodeSources(response.data.data)
+                const episodes = response.data.data
+
+                return {firstEpisodeSources, episodes}
+            })
     }
 
     changeSource = (episodeIndex) => {

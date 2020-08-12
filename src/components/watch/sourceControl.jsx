@@ -41,7 +41,7 @@ class SourceControl extends Component {
                 />
         
                 {this.props.loading && (
-                    <div class="loading">
+                    <div className="loading">
                         <Loader />
                     </div>
                 )}
