@@ -5,7 +5,6 @@ import VideoPlayer from 'components/videoPlayer';
 import NavBar from 'components/navBar';
 import Checkbox from 'components/checkbox';
 import SourceControl from 'components/watch/sourceControl';
-import slugify from 'services/utilities/slugify';
 
 /* ---------- */
 import './styles/watch.scss';
@@ -18,7 +17,6 @@ class WatchPage extends React.Component {
         this.state = {
             id: null,
             isTvShow: null,
-            title: null,
             seasons: null,
             episodes: null,
             activeSeason: 1,
@@ -68,8 +66,7 @@ class WatchPage extends React.Component {
                     <VideoPlayer 
                         ref={this.player} 
                         {...this.state.videoJsOptions} 
-                        backgroundImage={this.state.backgroundImage} 
-                        title={this.state.title} 
+                        backgroundImage={this.state.backgroundImage}
                         autoplayEpisodes={this.state.autoSwitchEpisodes}
                         activeEpisode={this.state.activeEpisode}
                         episodes={this.state.episodes}
@@ -105,14 +102,12 @@ class WatchPage extends React.Component {
             .then(response => {
 
                 const id = response.data.data.id;
-                const matchingTitle = this.matchTitle(response.data.data, this.props.match.params.title);
                 const seasons = response.data.data.seasons ? response.data.data.seasons.data.length : null;
                 const isTvShow = response.data.data.isTvShow;
                 const backgroundImage = response.data.data.covers.data['1920'];
 
                 return {
                     id,
-                    matchingTitle,
                     seasons,
                     isTvShow,
                     backgroundImage
@@ -137,12 +132,6 @@ class WatchPage extends React.Component {
         this.setState({
             activeEpisode: episodeIndex-1
         })
-    }
-
-    matchTitle(data, slug) {
-        const { originalName, primaryName, secondaryName, tertiaryName } = data;
-        const matchingTitles = [originalName, primaryName, secondaryName, tertiaryName].filter(title => slugify(title) === slug);
-        return matchingTitles[0] || 'title not matched';
     }
 
     getEpisodeSources(episodes, index=0) {
