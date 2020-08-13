@@ -26,7 +26,6 @@ function App() {
             </div>
 
             <Footer />
-            
         </React.Fragment>
     )
 }

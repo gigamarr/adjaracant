@@ -31,13 +31,14 @@ class WatchPage extends React.Component {
     async componentDidMount() {
         // There are no lifecycle methods after componentDidMount so it is safe to use  async/await here
 
-        let initialState = await this.getInitialData(this.props.match.params.id);
-        let sources = await this.getFirstEpisodeSources(initialState.id);
+        const initialState = await this.getInitialData(this.props.match.params.id);
+        const episodes = await this.getEpisodes(initialState.id);
+	    const firstEpisodeSources = this.getEpisodeSources(episodes)
 
         this.setState({
 
             ...initialState,
-            episodes: sources.episodes,
+            episodes: episodes,
             videoJsOptions: {
                 autoplay: false,
                 controls: true,
@@ -51,7 +52,7 @@ class WatchPage extends React.Component {
                         "fullscreenToggle"
                     ]
                 },
-                sources: sources.firstEpisodeSources
+                sources: firstEpisodeSources
             }
 
         })
@@ -115,13 +116,11 @@ class WatchPage extends React.Component {
             })
     }
 
-    getFirstEpisodeSources(movieId) {
+    getEpisodes(movieId) {
         return adjaranetService.getFiles(movieId)
             .then(response => {
-                const firstEpisodeSources = this.getEpisodeSources(response.data.data)
                 const episodes = response.data.data
-
-                return {firstEpisodeSources, episodes}
+                return episodes 
             })
     }
 

@@ -14,14 +14,14 @@ export default {
         return apiClient.get(`search/${keywords}`)
     },
 
-    getData(movieId) {
+    getData(adjaraId) {
         // this one returns movie meta-data like ratings, posters, trailers etc. but not source files
-        return apiClient.get(`get-data/${movieId}`)
+        return apiClient.get(`get-data/${adjaraId}`)
     },
 
-    getFiles(movieId, seasonIndex=1) {
+    getFiles(id, seasonIndex=1) {
         // this one returns media source files
         // needs `id` not `adjaraId`
-        return apiClient.get(`get-files/${movieId}/${seasonIndex}`)
+        return apiClient.get(`get-files/${id}/${seasonIndex}`)
     }
 }

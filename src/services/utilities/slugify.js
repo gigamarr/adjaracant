@@ -12,6 +12,7 @@ function slugify(title) {
                                     ".", "<", ">", ":", ";", 
                                     "|", "[", "]"
                                 ]
+
     const titleArray = title.toLowerCase().split(" ")
 
     const slug = titleArray.map(element => {
