@@ -99,7 +99,6 @@ class WatchPage extends React.Component {
     }
 
     changeSource = (episodeIndex) => {
-        // episodes are zero-based unlike from seasons
         const sources = this.getAllSingleEpisodeSources(this.state.episodes, episodeIndex-1)
         this.player.current.changeSource(sources)
         this.setState({
@@ -108,14 +107,6 @@ class WatchPage extends React.Component {
     }
 
     getAllSingleEpisodeSources(episodes, index=0) {
-
-        /*  index is the index of an episode, by default, if source is movie, there will be only one index, which is 0
-            if it is a TV show with multiple episodes, we will change the index attribute accordingly, but regardless of the
-            content type, we want to grab `0` index on page load first.
-
-            both seasons - with value '0' and with value '1' return first season.
-            
-        */
         if (episodes[index] !== "undefined") {
             const sources = []
 
@@ -138,7 +129,7 @@ class WatchPage extends React.Component {
                 label: `${episode.lang} - ${file.quality}`,
                 type: "video/mp4"
             })
-	    })
+        })
 	    return sources
     }
 
