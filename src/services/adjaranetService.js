@@ -19,7 +19,7 @@ export default {
         return apiClient.get(`get-data/${adjaraId}`)
     },
 
-    getFiles(id, seasonIndex=1) {
+    getFiles(id, seasonIndex) {
         // this one returns media source files
         // needs `id` not `adjaraId`
         return apiClient.get(`get-files/${id}/${seasonIndex}`)

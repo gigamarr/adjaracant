@@ -31,8 +31,8 @@ class WatchPage extends React.Component {
     async componentDidMount() {
         // There are no lifecycle methods after componentDidMount so it is safe to use  async/await here
 
-        const initialState = await this.getInitialData(this.props.match.params.id);
-        const episodes = await this.getEpisodes(initialState.id);
+        const initialState = await this.getInitialData(this.props.match.params.id)
+        const episodes = await this.getEpisodes(initialState.id, 1)
         const firstEpisodeSources = this.getEpisodeSources(episodes)
 
         this.setState({
@@ -116,8 +116,8 @@ class WatchPage extends React.Component {
             })
     }
 
-    getEpisodes(movieId) {
-        return adjaranetService.getFiles(movieId)
+    getEpisodes(movieId, seasonIndex) {
+        return adjaranetService.getFiles(movieId, seasonIndex)
             .then(response => {
                 const episodes = response.data.data
                 return episodes 
@@ -165,29 +165,22 @@ class WatchPage extends React.Component {
         return;
     }
 
-    changeSeason = (seasonIndex) => {
+    changeSeason = async (seasonIndex) => {
         if (seasonIndex !== this.state.activeSeason) {
             this.setState({
                 episodesLoading: true
             })
     
             const activeSeason = seasonIndex
-            const episodes = []
-    
-            adjaranetService.getFiles(this.state.id, seasonIndex)
-            .then(response => {
-                response.data.data.forEach(episode => {
-                    episodes.push(episode)
-                })
-    
-                this.setState({
-                    episodes,
-                    activeSeason,
-                    episodesLoading: false
-                })
-    
-                this.changeSource(1)
+            const episodes = await this.getEpisodes(this.state.id, seasonIndex)
+	    
+            this.setState({
+                episodes,
+                activeSeason,
+                episodesLoading: false
             })
+	
+            this.changeSource(1)
         }
     }
 }
