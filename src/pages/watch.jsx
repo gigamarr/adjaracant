@@ -33,7 +33,7 @@ class WatchPage extends React.Component {
 
         const initialState = await this.getInitialData(this.props.match.params.id);
         const episodes = await this.getEpisodes(initialState.id);
-	    const firstEpisodeSources = this.getEpisodeSources(episodes)
+        const firstEpisodeSources = this.getEpisodeSources(episodes)
 
         this.setState({
 
