@@ -14,14 +14,22 @@ export default {
         return apiClient.get(`search/${keywords}`)
     },
 
-    getData(adjaraId) {
-        // this one returns movie meta-data like ratings, posters, trailers etc. but not source files
+    getMetaInformation(adjaraId) {
         return apiClient.get(`get-data/${adjaraId}`)
+		    .then(response => {
+                const id = response.data.data.id;
+                const seasons = response.data.data.seasons ? response.data.data.seasons.data.length : null;
+                const isTvShow = response.data.data.isTvShow;
+                const backgroundImage = response.data.data.covers.data['1920'];
+
+                return { id, seasons, isTvShow, backgroundImage }
+            })
     },
 
-    getFiles(id, seasonIndex) {
-        // this one returns media source files
-        // needs `id` not `adjaraId`
+    getEpisodes(id, seasonIndex) {
         return apiClient.get(`get-files/${id}/${seasonIndex}`)
+		    .then(response => {
+			    return response.data.data
+		    })
     }
 }
