@@ -1,0 +1,49 @@
+#episode-switcher {
+    transition: 0.2s opacity;
+    display: flex;
+    align-items: center;
+    padding: 3vw 0;
+    justify-content: center;
+    background: #202020;
+
+    #episodes-container {
+        width: 90%;
+        white-space: nowrap;
+        overflow-x: hidden;
+        
+        #episodes {
+            position: relative;
+            transition: 0.5s linear;
+        }
+
+    }
+
+    svg {
+        height: 3vw;
+        width: 3vw;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        opacity: 0.5;
+        position: absolute;
+        transition: 0.5s opacity;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.hidden {
+            opacity: 0;
+            cursor: default;
+        }
+
+        &#slide-right {
+            left: 0;
+        }
+
+        &#slide-left {
+            right: 0;
+        }
+    }
+}
+
+

@@ -5,11 +5,11 @@ import './styles/season.scss';
 /* ---------- */
 
 function Season(props) {
-    return (
-        <div className={`season${props.active ? ' active-season' : ''}`} onClick={() => props.changeSeason(props.season)}>
-            Season {props.season}
-        </div>
-    )
+	return (
+		<div className={`season${props.active ? ' active-season' : ''}`} onClick={() => props.changeSeason(props.season)}>
+			Season {props.season}
+		</div>
+	)
 }
 /* ---------- */
 

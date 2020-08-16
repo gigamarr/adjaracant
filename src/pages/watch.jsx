@@ -13,7 +13,7 @@ import './styles/watch.scss';
 class WatchPage extends React.Component {
     constructor(props) {
         super(props)
-        this.player = React.createRef();
+        this.player = React.createRef()
         this.state = {
             id: null,
             isTvShow: null,
@@ -98,16 +98,9 @@ class WatchPage extends React.Component {
         )
     }
 
-    changeSource = (episodeIndex) => {
-        const sources = this.getAllSingleEpisodeSources(this.state.episodes, episodeIndex-1)
-        this.player.current.changeSource(sources)
-        this.setState({
-            activeEpisode: episodeIndex-1
-        })
-    }
 
     getAllSingleEpisodeSources(episodes, index=0) {
-        if (episodes[index] !== "undefined") {
+        if (typeof episodes[index] !== "undefined") {
             const sources = []
 
             episodes[index].files.forEach(episode => {
@@ -115,7 +108,7 @@ class WatchPage extends React.Component {
                 sources.push(...episodeSources)
             })
 
-            return sources;   
+            return sources   
         }
     }
 
@@ -130,7 +123,16 @@ class WatchPage extends React.Component {
                 type: "video/mp4"
             })
         })
-	    return sources
+
+        return sources
+    }
+
+    changeSource = (episodeIndex) => {
+        const sources = this.getAllSingleEpisodeSources(this.state.episodes, episodeIndex-1)
+        this.player.current.changeSource(sources)
+        this.setState({
+            activeEpisode: episodeIndex-1
+        })
     }
 
     changeSeason = async (seasonIndex) => {
