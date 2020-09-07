@@ -32,7 +32,7 @@ class WatchPage extends React.Component {
         // There are no lifecycle methods after componentDidMount so it is safe to use  async/await here
 
         const metaInformation = await adjaranetService.getMetaInformation(this.props.match.params.id)
-        const episodes = await adjaranetService.getEpisodes(metaInformation.id, 1)
+	const episodes = await adjaranetService.getEpisodes(metaInformation.id, metaInformation.isTvShow ? '1':'0')
         const firstEpisodeSources = this.getAllSingleEpisodeSources(episodes)
 
         this.setState({
@@ -45,9 +45,9 @@ class WatchPage extends React.Component {
                 controlBar: {
                     children: [
                         "playToggle",
-                        "volumePanel",
                         "progressControl",
                         "remainingTimeDisplay",
+                        "volumePanel",
                         "qualitySelector",
                         "fullscreenToggle"
                     ]
