@@ -7,6 +7,7 @@ import {
 import Home from './pages/home';
 import WatchPage from './pages/watch';
 import Footer from 'components/footer';
+import NotFound from './pages/404';
 
 function App() {
     return (
@@ -14,6 +15,10 @@ function App() {
             <div id="wrapper">
                 <Router>
                     <Switch>
+			<Route path="/404">
+				<NotFound />
+			</Route>
+
                         <Route path="/watch/:id/:title">
                             <WatchPage />
                         </Route>
